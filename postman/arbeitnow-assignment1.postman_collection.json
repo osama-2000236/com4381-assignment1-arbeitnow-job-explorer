@@ -1,0 +1,70 @@
+{
+  "info": {
+    "name": "COM4381 Assignment 1 - Arbeitnow API",
+    "_postman_id": "af2fb7d9-7ac8-41d9-bdb8-9ed2f870f238",
+    "description": "Postman collection prepared for the COM4381 REST API demo.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET Jobs - Base Request",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://www.arbeitnow.com/api/job-board-api",
+          "protocol": "https",
+          "host": [
+            "www",
+            "arbeitnow",
+            "com"
+          ],
+          "path": [
+            "api",
+            "job-board-api"
+          ]
+        },
+        "description": "Base REST request used in the app."
+      },
+      "response": []
+    },
+    {
+      "name": "GET Jobs - Page 2 Demo",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://www.arbeitnow.com/api/job-board-api?page=2",
+          "protocol": "https",
+          "host": [
+            "www",
+            "arbeitnow",
+            "com"
+          ],
+          "path": [
+            "api",
+            "job-board-api"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "2"
+            }
+          ]
+        },
+        "description": "Example query parameter request for the assignment presentation."
+      },
+      "response": []
+    }
+  ]
+}
