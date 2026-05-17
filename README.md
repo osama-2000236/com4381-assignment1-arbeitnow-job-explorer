@@ -1,55 +1,36 @@
-# COM4381 Assignment 1 - English Job Explorer
+# COM4381 Assignment 1 - Job Explorer
 
-## Group Members
+Small React app for Part 2 of the assignment. Calls the Arbeitnow public jobs API from the browser, parses the JSON, and lets you search, filter, and sort the results.
 
-- Member 1: ______________________________
-- Student ID: ____________________________
-- Member 2: ______________________________
-- Student ID: ____________________________
-- Member 3: ______________________________
-- Student ID: ____________________________
+## Group members
 
-## Project Description
+| Name | Student ID |
+|------|------------|
+| Osama Abujarad | 1202883 |
+| Iyas Qasqas | 1220248 |
 
-This project is a real frontend implementation for **COM4381: Web Services Technologies**.
-It consumes the live **Arbeitnow Job Board API** from the browser using `fetch` and presents the returned jobs in a polished English LTR interface inspired by the Baydar / PalNet visual direction.
+## API used
 
-The scenario is practical for students and fresh graduates:
-
-- load real job data from a public REST API
-- search jobs by title, company, or location
-- filter by job type and remote availability
-- switch the live REST request between recent jobs and visa-sponsorship jobs
-- inspect job details in the interface
-- open the original application link from the provider
-
-## Selected API
-
-- Provider: `Arbeitnow Job Board API`
+- Provider: Arbeitnow Job Board API
 - Root URL: `https://www.arbeitnow.com`
 - Resource path: `/api/job-board-api`
-- HTTP method used: `GET`
-- Response format: `JSON`
-- Demo query parameters: `?page=2`, `?visa_sponsorship=true`
+- Method: `GET`
+- Format: `application/json`
+- Query parameters demoed live: `?page=2`, `?visa_sponsorship=true`
 
-## Repository Structure
+## What the app does
 
-```text
-.
-├─ assignment1/   # React + Vite source code
-├─ docs/          # presentation and demo notes
-├─ evidence/      # real screenshots from the running app and API
-└─ postman/       # Postman collection for Part 1
-```
+- Fires one GET per request mode (recent, page 2, visa sponsorship) and renders the response.
+- Search by title, company, location, or tag.
+- Filter by job type. Sort by newest, company, or remote first.
+- Click a row to see the description and open the original posting.
+- A copy button next to the active GET URL helps when paste-testing in Postman.
 
-## How to Run
+Search, filter, and sort run in the browser so we only hit the API when the request mode changes.
 
-### Requirements
+## Run it
 
-- Node.js 20+
-- pnpm 9+
-
-### Steps
+Requires Node 20+ and pnpm 9+.
 
 ```powershell
 cd assignment1
@@ -57,21 +38,39 @@ pnpm install
 pnpm dev
 ```
 
-Then open the local URL shown by Vite in the terminal, usually:
+Open the URL Vite prints (usually `http://localhost:5173`).
 
-```text
-http://localhost:5173
-```
-
-## Build for Production
+Production build:
 
 ```powershell
 cd assignment1
 pnpm build
 ```
 
-## Notes for the Class Demo
+Lint:
 
-- The API is consumed directly from the frontend with no backend proxy.
-- The app fetches one selected live API resource at a time, then performs search/filter/sort locally to avoid unnecessary API requests.
-- See `docs/demo-script.md` for the suggested 10-minute presentation flow.
+```powershell
+cd assignment1
+pnpm lint
+```
+
+## Repo layout
+
+```
+.
+assignment1/   React + Vite + TypeScript source
+docs/          demo script and presentation checklist
+evidence/      screenshots of the app and API responses
+postman/       Postman collection with the three requests
+```
+
+## Stack
+
+React 19, Vite 8, TypeScript. No UI library, no backend, no proxy. `fetch` goes from the browser straight to Arbeitnow.
+
+## Notes for the demo
+
+- `docs/demo-script.md` is the 10-minute walkthrough.
+- `docs/presentation-checklist.md` is what to click during the live demo.
+- `postman/arbeitnow-assignment1.postman_collection.json` covers the three requests one-to-one with the UI tabs.
+- Screenshots in `evidence/` are real captures from the running app and the live API.

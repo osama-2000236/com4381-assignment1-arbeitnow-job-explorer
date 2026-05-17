@@ -1,61 +1,56 @@
-# 10-Minute Demo Script
+# Demo script (10 minutes)
 
-## 1. Open with the problem
+Short plan for the in-class demo. One screen, one browser, one terminal.
 
-- This project solves Part 2 of the assignment by consuming a live REST API from a modern frontend.
-- The idea is useful for students and fresh graduates who want to explore real job opportunities quickly.
+## 1. What I built and why (1 min)
 
-## 2. Introduce the provider
+- Frontend that consumes a public REST API straight from the browser.
+- Picked a job-board API so the demo has a real, useful scenario for students who are about to graduate.
 
-- Provider: `Arbeitnow`
-- It publishes public job opportunities.
-- The service is useful because it exposes jobs as a REST resource that can be queried directly.
+## 2. The provider (1 min)
 
-## 3. Explain the REST resource
+- Arbeitnow publishes a public jobs feed with no authentication.
+- Useful because the response is plain JSON and they expose query parameters for filtering on the server side.
+
+## 3. REST resource (2 min)
+
+Open Postman, run the three saved requests:
+
+- `GET https://www.arbeitnow.com/api/job-board-api`  -> base resource, returns the latest jobs.
+- `GET https://www.arbeitnow.com/api/job-board-api?page=2`  -> shows pagination via a query parameter.
+- `GET https://www.arbeitnow.com/api/job-board-api?visa_sponsorship=true`  -> shows filtering via a query parameter.
+
+Point out for the slides / verbal explanation:
 
 - Root URL: `https://www.arbeitnow.com`
 - Resource path: `/api/job-board-api`
-- Full resource URL: `https://www.arbeitnow.com/api/job-board-api`
-- HTTP method: `GET`
-- Representation returned: `JSON`
-- Example query parameters: `?page=2` and `?visa_sponsorship=true`
+- HTTP method: `GET` (we only read)
+- Representation: `application/json`
 
-## 4. Show the API response
+## 4. JSON response (1 min)
 
-- Open the API in Postman or the browser.
-- Show that the response contains structured JSON fields such as:
-  - `slug`
-  - `company_name`
-  - `title`
-  - `location`
-  - `remote`
-  - `tags`
-  - `job_types`
-  - `url`
-  - `description`
+Expand one item in Postman so the class sees the fields the app actually uses:
 
-## 5. Show the frontend implementation
+`slug, company_name, title, description, location, remote, tags, job_types, url, created_at`.
 
-- Open the running React app.
-- Show the English LTR layout.
-- Show the summary cards loaded from real API data.
-- Switch the request mode from recent jobs to visa-sponsorship jobs.
-- Demonstrate search by title/company/location.
-- Demonstrate filtering by job type and remote-only.
-- Open one job and show the original application link.
+## 5. Frontend (3 min)
 
-## 6. Explain the useful scenario
+- Open the running app.
+- Show the API summary panel on the right side of the hero. It mirrors the same root URL / resource / method we just demoed in Postman.
+- Click the three request mode tabs in order: Recent, Page 2, Visa sponsorship. After each click, the GET URL on the dark request line updates and the network panel shows a single new fetch.
+- Click the small copy button on the request line, paste in Postman or the URL bar, and show it is the exact same URL.
+- Type a search query, change the sort, toggle remote-only. The counter at the bottom of the controls updates ("X of Y jobs match"). No new network requests because filtering is local.
+- Click Reset filters to clear them in one move.
+- Pick a job on the left. The right panel shows the description and the "Open the original posting" button which goes to Arbeitnow.
 
-- A student or graduate opens the interface.
-- The app loads real jobs from the API.
-- The user narrows the list locally with search and filters.
-- The user chooses a suitable opportunity and goes to the original provider page.
+## 6. The scenario (1 min)
 
-## 7. Close with implementation details
+A student or fresh graduate opens the app, narrows the list by skill or location, and clicks through to the original posting. The same code could be reused for any other Arbeitnow query.
 
-- Frontend stack: `React + Vite + TypeScript`
-- Data access: browser `fetch`
-- No mock data in the main flow
-- The `visa_sponsorship=true` request is implemented as a real query-parameter example, not just a slide note.
-- Real screenshots are stored in the `evidence/` folder
-- The Postman collection is stored in the `postman/` folder
+## 7. Stack and code (1 min)
+
+- React 19, Vite, TypeScript.
+- One `fetch` call lives in `assignment1/src/lib/api.ts`.
+- All UI state lives in `assignment1/src/App.tsx`.
+- No backend, no proxy, no mock data.
+- Three Postman requests map one-to-one to the three UI tabs.
