@@ -819,11 +819,10 @@ function App() {
 
         <section id="guide" className="guide" aria-label="REST notes">
           <div className="guide__head">
-            <h2>The REST pieces, one card each</h2>
+            <h2> The main REST principles </h2>
             <p>
-              This is the cheat sheet for the oral part of the assignment. Read across
-              left to right and you have covered every REST principle the lecturer
-              asked for in Part 1.
+              This is the cheat sheet for every REST principle that we are
+              asked for in Part 1 of the assignment.
             </p>
           </div>
 
