@@ -1,4 +1,4 @@
-import type { Job, JobsApiResponse } from '../types'
+import type { Job, JobsApiResponse, QueryMode } from '../types'
 
 const JOBS_ENDPOINT = 'https://www.arbeitnow.com/api/job-board-api'
 
@@ -29,8 +29,14 @@ function normalizeJob(entry: JobsApiResponse['data'][number]): Job {
   }
 }
 
-export async function fetchJobs(signal?: AbortSignal) {
-  const response = await fetch(JOBS_ENDPOINT, {
+export async function fetchJobs(mode: QueryMode, signal?: AbortSignal) {
+  const requestUrl = new URL(JOBS_ENDPOINT)
+
+  if (mode === 'visa') {
+    requestUrl.searchParams.set('visa_sponsorship', 'true')
+  }
+
+  const response = await fetch(requestUrl, {
     headers: {
       Accept: 'application/json',
     },

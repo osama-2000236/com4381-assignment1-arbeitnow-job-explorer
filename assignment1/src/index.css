@@ -47,6 +47,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden;
   color: var(--ink);
   background:
     radial-gradient(circle at top, rgba(82, 96, 48, 0.12), transparent 32%),
@@ -90,4 +91,5 @@ code {
 
 #root {
   min-height: 100vh;
+  overflow-x: hidden;
 }

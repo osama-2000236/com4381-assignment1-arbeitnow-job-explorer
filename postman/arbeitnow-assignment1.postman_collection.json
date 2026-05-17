@@ -65,6 +65,39 @@
         "description": "Example query parameter request for the assignment presentation."
       },
       "response": []
+    },
+    {
+      "name": "GET Jobs - Visa Sponsorship Demo",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://www.arbeitnow.com/api/job-board-api?visa_sponsorship=true",
+          "protocol": "https",
+          "host": [
+            "www",
+            "arbeitnow",
+            "com"
+          ],
+          "path": [
+            "api",
+            "job-board-api"
+          ],
+          "query": [
+            {
+              "key": "visa_sponsorship",
+              "value": "true"
+            }
+          ]
+        },
+        "description": "Query parameter request for jobs that indicate visa sponsorship."
+      },
+      "response": []
     }
   ]
 }

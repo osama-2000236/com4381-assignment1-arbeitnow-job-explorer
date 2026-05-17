@@ -18,7 +18,7 @@
 - Full resource URL: `https://www.arbeitnow.com/api/job-board-api`
 - HTTP method: `GET`
 - Representation returned: `JSON`
-- Example query parameter: `?page=2`
+- Example query parameters: `?page=2` and `?visa_sponsorship=true`
 
 ## 4. Show the API response
 
@@ -39,6 +39,7 @@
 - Open the running React app.
 - Show the Arabic RTL layout.
 - Show the summary cards loaded from real API data.
+- Switch the request mode from recent jobs to visa-sponsorship jobs.
 - Demonstrate search by title/company/location.
 - Demonstrate filtering by job type and remote-only.
 - Open one job and show the original application link.
@@ -55,5 +56,6 @@
 - Frontend stack: `React + Vite + TypeScript`
 - Data access: browser `fetch`
 - No mock data in the main flow
+- The `visa_sponsorship=true` request is implemented as a real query-parameter example, not just a slide note.
 - Real screenshots are stored in the `evidence/` folder
 - The Postman collection is stored in the `postman/` folder

@@ -8,7 +8,7 @@ import {
   formatPostedDate,
   normalizeText,
 } from './lib/formatters'
-import type { Job, SortMode } from './types'
+import type { Job, QueryMode, SortMode } from './types'
 
 function BaydarMark() {
   return (
@@ -101,12 +101,14 @@ const API_PROVIDER = 'Arbeitnow Job Board API'
 const API_ROOT_URL = 'https://www.arbeitnow.com'
 const API_RESOURCE_PATH = '/api/job-board-api'
 const API_DEMO_QUERY = '?page=2'
+const API_VISA_QUERY = '?visa_sponsorship=true'
 
 function App() {
   const [jobs, setJobs] = useState<Job[]>([])
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [remoteOnly, setRemoteOnly] = useState(false)
+  const [queryMode, setQueryMode] = useState<QueryMode>('recent')
   const [jobType, setJobType] = useState('all')
   const [sortMode, setSortMode] = useState<SortMode>('recent')
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading')
@@ -125,7 +127,7 @@ function App() {
       setErrorMessage('')
 
       try {
-        const nextJobs = await fetchJobs(controller.signal)
+        const nextJobs = await fetchJobs(queryMode, controller.signal)
 
         if (ignore) {
           return
@@ -162,7 +164,7 @@ function App() {
       ignore = true
       controller.abort()
     }
-  }, [reloadToken])
+  }, [queryMode, reloadToken])
 
   const normalizedSearch = normalizeText(deferredSearch)
   const availableJobTypes = Array.from(
@@ -219,6 +221,10 @@ function App() {
   const remoteCount = jobs.filter((job) => job.remote).length
   const companyCount = new Set(jobs.map((job) => job.companyName)).size
   const tagCount = new Set(jobs.flatMap((job) => job.tags)).size
+  const activeRequestUrl =
+    queryMode === 'visa'
+      ? API_ROOT_URL + API_RESOURCE_PATH + API_VISA_QUERY
+      : API_ROOT_URL + API_RESOURCE_PATH
 
   return (
     <main className="page-shell">
@@ -274,7 +280,11 @@ function App() {
             </div>
             <div>
               <dt>Query Demo</dt>
-              <dd>{API_DEMO_QUERY}</dd>
+              <dd>{queryMode === 'visa' ? API_VISA_QUERY : API_DEMO_QUERY}</dd>
+            </div>
+            <div>
+              <dt>Active Request</dt>
+              <dd>{activeRequestUrl}</dd>
             </div>
           </dl>
         </aside>
@@ -333,6 +343,35 @@ function App() {
 
       <section id="jobs" className="workspace">
         <div className="workspace__controls">
+          <fieldset className="query-switch">
+            <legend>طلب REST المستخدم الآن</legend>
+            <label>
+              <input
+                type="radio"
+                name="query-mode"
+                value="recent"
+                checked={queryMode === 'recent'}
+                onChange={() => startTransition(() => setQueryMode('recent'))}
+              />
+              <span>أحدث الوظائف</span>
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="query-mode"
+                value="visa"
+                checked={queryMode === 'visa'}
+                onChange={() => startTransition(() => setQueryMode('visa'))}
+              />
+              <span>Visa sponsorship</span>
+            </label>
+          </fieldset>
+
+          <div className="request-line">
+            <span>GET</span>
+            <code>{activeRequestUrl}</code>
+          </div>
+
           <div className="field">
             <label htmlFor="search">ابحث بالعنوان أو الشركة أو الموقع</label>
             <input
@@ -505,7 +544,7 @@ function App() {
                   </a>
                   <a
                     className="secondary-link"
-                    href="https://www.arbeitnow.com/api/job-board-api?page=2"
+                    href={API_ROOT_URL + API_RESOURCE_PATH + API_DEMO_QUERY}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -557,6 +596,11 @@ function App() {
             title="معامل الاستعلام"
             value={API_DEMO_QUERY}
             description="يستخدم لتبديل الصفحة في الاستعراض العملي داخل Postman أو المتصفح."
+          />
+          <RestFact
+            title="معامل عملي إضافي"
+            value={API_VISA_QUERY}
+            description="يعرض وظائف رعاية التأشيرة كما يوضح توثيق Arbeitnow، وهو مدمج داخل الواجهة."
           />
           <RestFact
             title="سيناريو الاستخدام"

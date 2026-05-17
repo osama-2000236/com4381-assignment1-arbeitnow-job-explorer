@@ -1,3 +1,5 @@
+export type QueryMode = 'recent' | 'visa'
+
 export type SortMode = 'recent' | 'company' | 'remote'
 
 export type Job = {

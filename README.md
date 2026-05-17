@@ -19,6 +19,7 @@ The scenario is practical for students and fresh graduates:
 - load real job data from a public REST API
 - search jobs by title, company, or location
 - filter by job type and remote availability
+- switch the live REST request between recent jobs and visa-sponsorship jobs
 - inspect job details in the interface
 - open the original application link from the provider
 
@@ -29,7 +30,7 @@ The scenario is practical for students and fresh graduates:
 - Resource path: `/api/job-board-api`
 - HTTP method used: `GET`
 - Response format: `JSON`
-- Demo query parameter: `?page=2`
+- Demo query parameters: `?page=2`, `?visa_sponsorship=true`
 
 ## Repository Structure
 
@@ -72,5 +73,5 @@ pnpm build
 ## Notes for the Class Demo
 
 - The API is consumed directly from the frontend with no backend proxy.
-- The app fetches the live jobs list once, then performs search/filter/sort locally to avoid unnecessary API requests.
+- The app fetches one selected live API resource at a time, then performs search/filter/sort locally to avoid unnecessary API requests.
 - See `docs/demo-script.md` for the suggested 10-minute presentation flow.
