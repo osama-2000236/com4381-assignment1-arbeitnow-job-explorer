@@ -6,6 +6,7 @@ import {
   formatCount,
   formatJobType,
   formatPostedDate,
+  formatRelativeDate,
   normalizeText,
 } from './lib/formatters'
 import type { Job, QueryMode, SortMode } from './types'
@@ -87,9 +88,17 @@ type JobRowProps = {
   isBookmarked: boolean
   onSelect: (slug: string) => void
   onToggleBookmark: (slug: string) => void
+  onPickTag: (tag: string) => void
 }
 
-function JobRow({ job, isActive, isBookmarked, onSelect, onToggleBookmark }: JobRowProps) {
+function JobRow({
+  job,
+  isActive,
+  isBookmarked,
+  onSelect,
+  onToggleBookmark,
+  onPickTag,
+}: JobRowProps) {
   return (
     <div className={`job${isActive ? ' job--active' : ''}`}>
       <button
@@ -110,19 +119,30 @@ function JobRow({ job, isActive, isBookmarked, onSelect, onToggleBookmark }: Job
 
         <div className="job__meta">
           <span>{job.location}</span>
-          <span>{formatPostedDate(job.createdAt)}</span>
+          <span title={formatPostedDate(job.createdAt)}>
+            {formatRelativeDate(job.createdAt)}
+          </span>
         </div>
 
         <p className="job__summary">{job.summary}</p>
-
-        <div className="job__tags">
-          {job.tags.slice(0, 3).map((tag) => (
-            <span key={`${job.slug}-${tag}`} className="chip">
-              {tag}
-            </span>
-          ))}
-        </div>
       </button>
+
+      <div className="job__tags">
+        {job.tags.slice(0, 3).map((tag) => (
+          <button
+            type="button"
+            key={`${job.slug}-${tag}`}
+            className="chip chip--button"
+            onClick={(event) => {
+              event.stopPropagation()
+              onPickTag(tag)
+            }}
+            title={`Filter by "${tag}"`}
+          >
+            #{tag}
+          </button>
+        ))}
+      </div>
 
       <button
         type="button"
@@ -305,6 +325,14 @@ function App() {
     setBookmarks((current) =>
       current.includes(slug) ? current.filter((s) => s !== slug) : [...current, slug],
     )
+  }
+
+  function pickTag(tag: string) {
+    startTransition(() => {
+      setSearchQuery(tag)
+      setSavedOnly(false)
+    })
+    document.getElementById('workspace')?.scrollIntoView({ behavior: 'smooth' })
   }
 
   async function copyRequestUrl() {
@@ -673,6 +701,7 @@ function App() {
                     isBookmarked={bookmarkSet.has(job.slug)}
                     onSelect={setSelectedSlug}
                     onToggleBookmark={toggleBookmark}
+                    onPickTag={pickTag}
                   />
                 ))}
             </section>
@@ -712,7 +741,9 @@ function App() {
                     </div>
                     <div>
                       <dt>Posted</dt>
-                      <dd>{formatPostedDate(activeJob.createdAt)}</dd>
+                      <dd title={formatPostedDate(activeJob.createdAt)}>
+                        {formatRelativeDate(activeJob.createdAt)}
+                      </dd>
                     </div>
                     <div>
                       <dt>Type</dt>
@@ -726,9 +757,15 @@ function App() {
                   {activeJob.tags.length > 0 && (
                     <div className="detail__tags">
                       {activeJob.tags.map((tag) => (
-                        <span key={`${activeJob.slug}-d-${tag}`} className="chip">
-                          {tag}
-                        </span>
+                        <button
+                          type="button"
+                          key={`${activeJob.slug}-d-${tag}`}
+                          className="chip chip--button"
+                          onClick={() => pickTag(tag)}
+                          title={`Filter by "${tag}"`}
+                        >
+                          #{tag}
+                        </button>
                       ))}
                     </div>
                   )}

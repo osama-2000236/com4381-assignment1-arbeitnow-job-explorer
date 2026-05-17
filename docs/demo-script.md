@@ -33,6 +33,7 @@ Expand one job in Postman so the class sees the fields the UI actually uses: `sl
 - Click the three request tabs: **Latest jobs** (no params), **Older page** (`?page=2`), **Visa-friendly only** (`?visa_sponsorship=true`). The dark URL line and the helper note under the tabs both update. DevTools network panel shows exactly one new request per click.
 - Hit the small copy button next to the GET URL, paste into the URL bar, prove it is the same string.
 - Type in the search box. Toggle remote-only. Switch sort. The counter at the bottom updates ("X of Y match"). Network stays quiet because everything below the tabs is local.
+- Click any `#tag` chip on a job card. The search box fills with that tag and the list filters live without a new request. Useful when the user spots a skill they want and just wants more like it.
 - Click the star on two or three jobs. The number in the topbar pill goes up.
 - Click that pill. The list flips to saved-only. Refresh the page. The saves survive (localStorage).
 - Open one job. Show the description and click "Open the original posting".

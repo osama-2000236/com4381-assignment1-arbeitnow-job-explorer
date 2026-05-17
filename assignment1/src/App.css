@@ -681,8 +681,12 @@
 
 .job {
   position: relative;
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'hit  star'
+    'tags tags';
+  align-items: start;
   gap: 4px;
   border: 1px solid transparent;
   border-radius: var(--radius-md);
@@ -691,6 +695,10 @@
     background-color var(--dur-base) var(--ease-standard),
     border-color var(--dur-base) var(--ease-standard);
 }
+
+.job__hit { grid-area: hit; }
+.star { grid-area: star; }
+.job__tags { grid-area: tags; padding: 0 12px 12px; margin-top: 0; }
 
 .job:hover {
   background: var(--surface-subtle);
@@ -706,12 +714,11 @@
 }
 
 .job__hit {
-  flex: 1 1 auto;
   min-width: 0;
   text-align: start;
   border: 0;
   background: transparent;
-  padding: 12px;
+  padding: 12px 12px 0;
   cursor: pointer;
   border-radius: var(--radius-md);
 }
@@ -797,6 +804,25 @@
   background: var(--surface-sunken);
   color: var(--ink-muted);
   font-family: var(--font-mono);
+}
+
+/* Tag chips that double as a filter shortcut. Hover hint makes the affordance
+ * obvious without adding a separate button column. */
+.chip--button {
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-base) var(--ease-standard),
+    color var(--dur-base) var(--ease-standard),
+    border-color var(--dur-base) var(--ease-standard);
+}
+
+.chip--button:hover,
+.chip--button:focus-visible {
+  background: var(--brand-50);
+  color: var(--brand-700);
+  border-color: var(--brand-200);
+  outline: none;
 }
 
 /* Star button (bookmark) */
