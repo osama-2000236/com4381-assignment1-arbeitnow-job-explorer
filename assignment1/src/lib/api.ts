@@ -23,7 +23,7 @@ function normalizeJob(entry: JobsApiResponse['data'][number]): Job {
     url: entry.url,
     tags: entry.tags ?? [],
     jobTypes: entry.job_types ?? [],
-    location: entry.location || 'غير محدد',
+    location: entry.location || 'Not specified',
     createdAt: entry.created_at,
     summary: summary.endsWith('.') ? summary : `${summary}...`,
   }
@@ -44,13 +44,13 @@ export async function fetchJobs(mode: QueryMode, signal?: AbortSignal) {
   })
 
   if (!response.ok) {
-    throw new Error(`فشل الاتصال بالخدمة. رمز الاستجابة: ${response.status}`)
+    throw new Error(`The API request failed with status ${response.status}.`)
   }
 
   const payload = (await response.json()) as JobsApiResponse
 
   if (!payload.data || !Array.isArray(payload.data)) {
-    throw new Error('صيغة البيانات غير متوقعة من خدمة الوظائف.')
+    throw new Error('The jobs API returned an unexpected data shape.')
   }
 
   return payload.data.map(normalizeJob)

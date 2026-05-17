@@ -37,7 +37,7 @@
 ## 5. Show the frontend implementation
 
 - Open the running React app.
-- Show the Arabic RTL layout.
+- Show the English LTR layout.
 - Show the summary cards loaded from real API data.
 - Switch the request mode from recent jobs to visa-sponsorship jobs.
 - Demonstrate search by title/company/location.

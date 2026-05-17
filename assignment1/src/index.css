@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --brand-50: #f4f6ef;
-  --brand-100: #e6ebd6;
-  --brand-600: #526030;
-  --brand-700: #3f4a26;
-  --accent-600: #a8482c;
-  --accent-700: #8f3b23;
-  --ink: #1a1a17;
-  --ink-muted: #5c5a52;
-  --ink-subtle: #8a8880;
+  --brand-50: #f1f5e8;
+  --brand-100: #dfe8c9;
+  --brand-600: #586b2f;
+  --brand-700: #405023;
+  --accent-600: #b95a31;
+  --accent-700: #974324;
+  --ink: #171713;
+  --ink-muted: #57574f;
+  --ink-subtle: #838278;
   --surface: #ffffff;
-  --surface-muted: #faf9f5;
-  --surface-subtle: #f1efe7;
-  --surface-sunken: #ebe8dc;
+  --surface-muted: #f8f6ee;
+  --surface-subtle: #efede2;
+  --surface-sunken: #e6e1d2;
   --line-soft: rgba(26, 26, 23, 0.08);
   --line-hard: rgba(26, 26, 23, 0.16);
-  --shadow-soft: 0 18px 48px rgba(52, 53, 39, 0.08);
-  --shadow-panel: 0 24px 60px rgba(43, 43, 30, 0.1);
+  --shadow-soft: 0 18px 48px rgba(52, 53, 39, 0.1);
+  --shadow-panel: 0 24px 70px rgba(43, 43, 30, 0.12);
   --radius-xl: 32px;
   --radius-lg: 24px;
   --radius-md: 18px;
@@ -26,7 +26,7 @@
 
   color: var(--ink);
   background: var(--surface-muted);
-  font-family: 'IBM Plex Sans Arabic', 'Segoe UI', sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
   line-height: 1.6;
   font-weight: 400;
   text-rendering: optimizeLegibility;
@@ -50,8 +50,9 @@ body {
   overflow-x: hidden;
   color: var(--ink);
   background:
-    radial-gradient(circle at top, rgba(82, 96, 48, 0.12), transparent 32%),
-    linear-gradient(180deg, #f7f6f0 0%, #f4f1e8 100%);
+    radial-gradient(circle at 8% 4%, rgba(185, 90, 49, 0.13), transparent 24rem),
+    radial-gradient(circle at 82% 8%, rgba(88, 107, 47, 0.17), transparent 28rem),
+    linear-gradient(180deg, #fbfaf5 0%, #f2eee2 100%);
 }
 
 body::before {
@@ -86,7 +87,7 @@ img {
 }
 
 code {
-  font-family: 'IBM Plex Sans Arabic', 'Segoe UI', sans-serif;
+  font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
 }
 
 #root {

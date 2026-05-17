@@ -1,19 +1,19 @@
 const jobTypeDictionary: Record<string, string> = {
-  full_time: 'دوام كامل',
-  part_time: 'دوام جزئي',
-  contract: 'عقد',
-  freelance: 'عمل حر',
-  internship: 'تدريب',
-  intern: 'متدرب',
-  temporary: 'مؤقت',
-  graduate: 'خريج حديث',
-  traineeship: 'برنامج تدريبي',
-  volunteer: 'تطوع',
-  berufserfahren: 'خبرة مهنية',
+  full_time: 'Full time',
+  part_time: 'Part time',
+  contract: 'Contract',
+  freelance: 'Freelance',
+  internship: 'Internship',
+  intern: 'Intern',
+  temporary: 'Temporary',
+  graduate: 'Graduate',
+  traineeship: 'Traineeship',
+  volunteer: 'Volunteer',
+  berufserfahren: 'Experienced',
 }
 
 export function formatCount(value: number) {
-  return new Intl.NumberFormat('ar-PS').format(value)
+  return new Intl.NumberFormat('en-US').format(value)
 }
 
 export function normalizeText(value: string) {
@@ -33,7 +33,7 @@ export function formatJobType(value: string) {
 }
 
 export function formatPostedDate(unixSeconds: number) {
-  return new Intl.DateTimeFormat('ar-PS', {
+  return new Intl.DateTimeFormat('en-US', {
     dateStyle: 'medium',
   }).format(new Date(unixSeconds * 1000))
 }

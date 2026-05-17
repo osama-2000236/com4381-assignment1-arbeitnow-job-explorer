@@ -1,4 +1,4 @@
-# COM4381 Assignment 1 — Arabic RTL Job Explorer
+# COM4381 Assignment 1 - English Job Explorer
 
 ## Group Members
 
@@ -12,7 +12,7 @@
 ## Project Description
 
 This project is a real frontend implementation for **COM4381: Web Services Technologies**.
-It consumes the live **Arbeitnow Job Board API** from the browser using `fetch` and presents the returned jobs in an Arabic-first RTL interface inspired by the Baydar / PalNet visual direction.
+It consumes the live **Arbeitnow Job Board API** from the browser using `fetch` and presents the returned jobs in a polished English LTR interface inspired by the Baydar / PalNet visual direction.
 
 The scenario is practical for students and fresh graduates:
 

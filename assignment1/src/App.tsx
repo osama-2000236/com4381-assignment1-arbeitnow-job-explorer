@@ -16,7 +16,7 @@ function BaydarMark() {
       className="brand-mark"
       viewBox="0 0 56 56"
       role="img"
-      aria-label="شعار بيدر"
+      aria-label="Baydar Jobs mark"
     >
       <rect x="4" y="4" width="48" height="48" rx="16" />
       <path d="M34.8 18.2H23.6c-4.9 0-8.8 4-8.8 8.8v9.4c0 1.6 1.3 2.8 2.8 2.8s2.8-1.3 2.8-2.8V27c0-1.8 1.4-3.2 3.2-3.2h8.3v6.7h-8.2c-1.5 0-2.8 1.2-2.8 2.8s1.2 2.8 2.8 2.8h11.1c1.6 0 2.8-1.3 2.8-2.8V21c0-1.6-1.3-2.8-2.8-2.8Z" />
@@ -59,7 +59,7 @@ function JobListItem({ job, isActive, onSelect }: JobListItemProps) {
           <span>{job.companyName}</span>
         </div>
         <span className={`job-badge${job.remote ? ' job-badge--accent' : ''}`}>
-          {job.remote ? 'عن بُعد' : 'حضوري / هجين'}
+          {job.remote ? 'Remote' : 'On-site or hybrid'}
         </span>
       </div>
 
@@ -136,7 +136,7 @@ function App() {
         setJobs(nextJobs)
         setSelectedSlug(nextJobs[0]?.slug ?? null)
         setLastUpdated(
-          new Intl.DateTimeFormat('ar-PS', {
+          new Intl.DateTimeFormat('en-US', {
             dateStyle: 'medium',
             timeStyle: 'short',
           }).format(new Date()),
@@ -153,7 +153,7 @@ function App() {
         setErrorMessage(
           error instanceof Error
             ? error.message
-            : 'تعذر تحميل الوظائف حالياً. حاول مرة أخرى بعد قليل.',
+            : 'Jobs could not be loaded right now. Please try again in a moment.',
         )
       }
     }
@@ -232,35 +232,36 @@ function App() {
         <div className="topbar__brand">
           <BaydarMark />
           <div>
-            <strong>بيدر للوظائف</strong>
-            <span>Arabic RTL REST Explorer</span>
+            <strong>Baydar Jobs</strong>
+            <span>English REST Job Explorer</span>
           </div>
         </div>
 
-        <nav className="topbar__nav" aria-label="التنقل الرئيسي">
-          <a href="#jobs">استكشف الوظائف</a>
-          <a href="#rest-guide">شرح REST</a>
+        <nav className="topbar__nav" aria-label="Primary navigation">
+          <a href="#jobs">Explore jobs</a>
+          <a href="#rest-guide">REST explanation</a>
           <a href="https://www.arbeitnow.com/api/job-board-api" target="_blank" rel="noreferrer">
-            افتح الـ API
+            Open API
           </a>
         </nav>
       </header>
 
       <section className="hero-panel">
         <div className="hero-panel__copy">
-          <span className="eyebrow">مشروع COM4381 - استهلاك REST API حقيقي</span>
-          <h1>مستكشف وظائف عربي يجلب بيانات حقيقية مباشرة من Arbeitnow</h1>
+          <span className="eyebrow">COM4381 project with a real REST API</span>
+          <h1>Explore live job data from Arbeitnow with a polished English interface.</h1>
           <p>
-            هذه الواجهة مبنية بـ <strong>React + Vite</strong> وتستهلك خدمة REST حقيقية عبر
-            <code>GET</code> ثم تتيح للطالب أو الخريج تصفية النتائج محلياً بدون استدعاءات زائدة.
+            This <strong>React + Vite</strong> client calls a real REST endpoint with
+            <code>GET</code>, then lets students and graduates search, filter, compare,
+            and open original application links without unnecessary repeated requests.
           </p>
 
           <div className="hero-panel__actions">
             <a className="primary-link" href="#jobs">
-              ابدأ الاستكشاف
+              Start exploring
             </a>
             <a className="secondary-link" href="#rest-guide">
-              شاهد شرح REST
+              View REST proof
             </a>
           </div>
         </div>
@@ -268,7 +269,7 @@ function App() {
         <aside className="hero-panel__highlight">
           <span className="status-pill status-pill--live">Live API</span>
           <strong>{API_PROVIDER}</strong>
-          <p>المزوّد يعرض فرص عمل عامة بصيغة JSON ويمكن الوصول إليه من الواجهة مباشرة.</p>
+          <p>The provider exposes public job opportunities as JSON and can be consumed directly from the browser.</p>
           <dl>
             <div>
               <dt>Root URL</dt>
@@ -290,44 +291,44 @@ function App() {
         </aside>
       </section>
 
-      <section className="stats-grid" aria-label="ملخص البيانات">
+      <section className="stats-grid" aria-label="Live data summary">
         <StatCard
-          label="الوظائف المتاحة"
+          label="Jobs loaded"
           value={formatCount(jobs.length)}
-          hint="تم جلبها مرة واحدة من الواجهة الحية"
+          hint="Fetched from the live endpoint"
         />
         <StatCard
-          label="الشركات"
+          label="Companies"
           value={formatCount(companyCount)}
-          hint="عدد الجهات التي ظهرت في الصفحة الحالية"
+          hint="Unique employers in this page"
         />
         <StatCard
-          label="عن بُعد"
+          label="Remote"
           value={formatCount(remoteCount)}
-          hint="مناسب للطلاب والخريجين الباحثين عن مرونة"
+          hint="Flexible opportunities for students"
         />
         <StatCard
-          label="الوسوم"
+          label="Tags"
           value={formatCount(tagCount)}
-          hint="تفيد في فهم التخصصات والمهارات المطلوبة"
+          hint="Signals skills and job families"
         />
       </section>
 
-      <section className="api-status-panel" aria-label="حالة الاتصال">
+      <section className="api-status-panel" aria-label="API connection status">
         <div>
           <span className={`status-pill${status === 'success' ? ' status-pill--live' : ''}`}>
             {status === 'loading'
-              ? 'جار التحميل'
+              ? 'Loading'
               : status === 'success'
-                ? 'الاتصال ناجح'
-                : 'يوجد خطأ'}
+                ? 'Connected'
+                : 'Error'}
           </span>
-          <strong>حالة جلب البيانات</strong>
+          <strong>Live data status</strong>
           <p>
             {status === 'loading'
-              ? 'يتم الآن تحميل البيانات الحقيقية من خدمة Arbeitnow.'
+              ? 'Loading real data from Arbeitnow now.'
               : status === 'success'
-                ? `آخر تحديث: ${lastUpdated}`
+                ? `Last updated: ${lastUpdated}`
                 : errorMessage}
           </p>
         </div>
@@ -337,14 +338,14 @@ function App() {
           className="ghost-button"
           onClick={() => startTransition(() => setReloadToken((value) => value + 1))}
         >
-          إعادة التحميل من الـ API
+          Refresh from API
         </button>
       </section>
 
       <section id="jobs" className="workspace">
         <div className="workspace__controls">
           <fieldset className="query-switch">
-            <legend>طلب REST المستخدم الآن</legend>
+            <legend>Current REST request</legend>
             <label>
               <input
                 type="radio"
@@ -353,7 +354,7 @@ function App() {
                 checked={queryMode === 'recent'}
                 onChange={() => startTransition(() => setQueryMode('recent'))}
               />
-              <span>أحدث الوظائف</span>
+              <span>Recent jobs</span>
             </label>
             <label>
               <input
@@ -373,12 +374,12 @@ function App() {
           </div>
 
           <div className="field">
-            <label htmlFor="search">ابحث بالعنوان أو الشركة أو الموقع</label>
+            <label htmlFor="search">Search by title, company, location, or skill</label>
             <input
               id="search"
               type="search"
               value={searchQuery}
-              placeholder="مثال: developer أو berlin"
+              placeholder="Try developer, Berlin, support..."
               onChange={(event) =>
                 startTransition(() => setSearchQuery(event.target.value))
               }
@@ -387,7 +388,7 @@ function App() {
 
           <div className="field-group">
             <div className="field">
-              <label htmlFor="job-type">نوع الوظيفة</label>
+              <label htmlFor="job-type">Job type</label>
               <select
                 id="job-type"
                 value={jobType}
@@ -395,7 +396,7 @@ function App() {
                   startTransition(() => setJobType(event.target.value))
                 }
               >
-                <option value="all">كل الأنواع</option>
+                <option value="all">All types</option>
                 {availableJobTypes.map((type) => (
                   <option key={type} value={type}>
                     {formatJobType(type)}
@@ -405,7 +406,7 @@ function App() {
             </div>
 
             <div className="field">
-              <label htmlFor="sort-mode">الترتيب</label>
+              <label htmlFor="sort-mode">Sort by</label>
               <select
                 id="sort-mode"
                 value={sortMode}
@@ -413,9 +414,9 @@ function App() {
                   startTransition(() => setSortMode(event.target.value as SortMode))
                 }
               >
-                <option value="recent">الأحدث أولاً</option>
-                <option value="company">بحسب اسم الشركة</option>
-                <option value="remote">عن بُعد أولاً</option>
+                <option value="recent">Newest first</option>
+                <option value="company">Company name</option>
+                <option value="remote">Remote first</option>
               </select>
             </div>
           </div>
@@ -429,40 +430,40 @@ function App() {
                 startTransition(() => setRemoteOnly(event.target.checked))
               }
             />
-            <span>عرض الوظائف التي تشير إلى العمل عن بُعد فقط</span>
+            <span>Show remote jobs only</span>
           </label>
 
           <div className="workspace__summary">
-            <strong>{formatCount(filteredJobs.length)} نتيجة مرئية</strong>
-            <span>التصفية محلية بعد تحميل واحد فقط لتقليل الطلبات على الواجهة.</span>
+            <strong>{formatCount(filteredJobs.length)} visible result{filteredJobs.length === 1 ? '' : 's'}</strong>
+            <span>Filtering is local after one live request to keep API usage low.</span>
           </div>
         </div>
 
         <div className="workspace__content">
-          <section className="results-panel" aria-label="قائمة الوظائف">
+          <section className="results-panel" aria-label="Job results">
             <div className="section-heading">
-              <h2>قائمة الفرص</h2>
-              <p>اختر أي بطاقة لعرض التفاصيل والانتقال إلى صفحة التقديم الأصلية.</p>
+              <h2>Opportunity list</h2>
+              <p>Select a job to inspect details and continue to the original provider page.</p>
             </div>
 
             {status === 'loading' && (
               <div className="panel-message">
-                <strong>جار تحميل الوظائف...</strong>
-                <p>ننتظر الاستجابة الحية من المورد ثم سنفعل التصفية والفرز داخل المتصفح.</p>
+                <strong>Loading jobs...</strong>
+                <p>Waiting for the live provider response, then search and sorting run in the browser.</p>
               </div>
             )}
 
             {status === 'error' && (
               <div className="panel-message panel-message--error">
-                <strong>تعذر إكمال الطلب</strong>
+                <strong>Request failed</strong>
                 <p>{errorMessage}</p>
               </div>
             )}
 
             {status === 'success' && filteredJobs.length === 0 && (
               <div className="panel-message">
-                <strong>لا توجد نتائج مطابقة</strong>
-                <p>غيّر كلمات البحث أو ألغِ مرشح العمل عن بُعد لتوسيع النتائج.</p>
+                <strong>No matching jobs</strong>
+                <p>Try a broader search term, change the job type, or turn off the remote-only filter.</p>
               </div>
             )}
 
@@ -478,10 +479,10 @@ function App() {
             </div>
           </section>
 
-          <aside className="detail-panel" aria-label="تفاصيل الوظيفة">
+          <aside className="detail-panel" aria-label="Selected job details">
             <div className="section-heading">
-              <h2>تفاصيل مختارة</h2>
-              <p>هذا السيناريو مفيد لطالب أو خريج يراجع الفرص بسرعة ثم ينتقل للرابط الأصلي.</p>
+              <h2>Selected details</h2>
+              <p>Review the most useful information before opening the original application page.</p>
             </div>
 
             {activeJob ? (
@@ -492,22 +493,22 @@ function App() {
                     <span>{activeJob.companyName}</span>
                   </div>
                   <span className={`job-badge${activeJob.remote ? ' job-badge--accent' : ''}`}>
-                    {activeJob.remote ? 'Remote' : 'On-site / Hybrid'}
+                    {activeJob.remote ? 'Remote' : 'On-site or hybrid'}
                   </span>
                 </div>
 
                 <dl className="detail-card__facts">
                   <div>
-                    <dt>الموقع</dt>
+                    <dt>Location</dt>
                     <dd>{activeJob.location}</dd>
                   </div>
                   <div>
-                    <dt>نُشرت في</dt>
+                    <dt>Posted</dt>
                     <dd>{formatPostedDate(activeJob.createdAt)}</dd>
                   </div>
                   <div>
-                    <dt>أنواع الوظيفة</dt>
-                    <dd>{activeJob.jobTypes.map(formatJobType).join('، ') || 'غير محدد'}</dd>
+                    <dt>Job types</dt>
+                    <dd>{activeJob.jobTypes.map(formatJobType).join(', ') || 'Not specified'}</dd>
                   </div>
                 </dl>
 
@@ -540,7 +541,7 @@ function App() {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    افتح صفحة التقديم الأصلية
+                    Open original application
                   </a>
                   <a
                     className="secondary-link"
@@ -548,14 +549,14 @@ function App() {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    مثال حي على page=2
+                    Live page=2 example
                   </a>
                 </div>
               </article>
             ) : (
               <div className="panel-message">
-                <strong>اختر وظيفة من القائمة</strong>
-                <p>ستظهر هنا التفاصيل الكاملة بمجرد تحديد بطاقة من النتائج.</p>
+                <strong>Select a job from the list</strong>
+                <p>The full detail preview will appear here once a result is selected.</p>
               </div>
             )}
           </aside>
@@ -564,48 +565,48 @@ function App() {
 
       <section id="rest-guide" className="rest-guide">
         <div className="section-heading">
-          <h2>كيف يحقق المشروع مبادئ REST في العرض الصفي</h2>
+          <h2>How this project demonstrates REST</h2>
           <p>
-            هذا القسم مخصص للشرح أثناء العرض: من هو المزوّد، ما المورد، كيف نرسل الطلب، وما
-            نوع البيانات التي نحصل عليها.
+            Use this section in the presentation to explain the provider, resource, HTTP method,
+            JSON representation, and query parameters.
           </p>
         </div>
 
         <div className="rest-guide__grid">
           <RestFact
-            title="مزوّد الخدمة"
+            title="API provider"
             value={API_PROVIDER}
-            description="خدمة عامة لعرض فرص العمل، وتسمح باستهلاك البيانات عبر مورد واحد واضح."
+            description="A public job-board service that exposes job openings through a clear REST resource."
           />
           <RestFact
-            title="المورد الأساسي"
+            title="Base resource"
             value={API_ROOT_URL + API_RESOURCE_PATH}
-            description="يمثل قائمة الوظائف كمورد يمكن استدعاؤه مباشرة من العميل."
+            description="Represents the jobs collection and can be called directly from the frontend."
           />
           <RestFact
-            title="الفعل HTTP"
+            title="HTTP method"
             value="GET"
-            description="نستخدم GET لأننا نسترجع بيانات فقط ولا نرسل تعديلات للخادم."
+            description="GET is used because the app only reads data and does not modify server state."
           />
           <RestFact
-            title="تمثيل الاستجابة"
+            title="Response representation"
             value="application/json"
-            description="الاستجابة تعود بصيغة JSON، ثم نحوّلها إلى بطاقات وتفاصيل قابلة للعرض."
+            description="The API returns JSON that the client maps into searchable cards and details."
           />
           <RestFact
-            title="معامل الاستعلام"
+            title="Required query demo"
             value={API_DEMO_QUERY}
-            description="يستخدم لتبديل الصفحة في الاستعراض العملي داخل Postman أو المتصفح."
+            description="Demonstrates pagination in Postman or the browser for Assignment Part 1."
           />
           <RestFact
-            title="معامل عملي إضافي"
+            title="Implemented query demo"
             value={API_VISA_QUERY}
-            description="يعرض وظائف رعاية التأشيرة كما يوضح توثيق Arbeitnow، وهو مدمج داخل الواجهة."
+            description="A real query mode implemented in the UI to show how query parameters change data."
           />
           <RestFact
-            title="سيناريو الاستخدام"
-            value="طالب أو خريج يبحث عن فرصة"
-            description="يفتح الواجهة، يراجع الفرص، يفلتر النتائج، ثم ينتقل لصفحة التقديم الأصلية."
+            title="Use case"
+            value="Student or graduate job search"
+            description="The user loads real jobs, narrows the results locally, then opens the original posting."
           />
         </div>
       </section>
