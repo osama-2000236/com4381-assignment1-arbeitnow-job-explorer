@@ -32,6 +32,10 @@ function normalizeJob(entry: JobsApiResponse['data'][number]): Job {
 export async function fetchJobs(mode: QueryMode, signal?: AbortSignal) {
   const requestUrl = new URL(JOBS_ENDPOINT)
 
+  if (mode === 'page2') {
+    requestUrl.searchParams.set('page', '2')
+  }
+
   if (mode === 'visa') {
     requestUrl.searchParams.set('visa_sponsorship', 'true')
   }

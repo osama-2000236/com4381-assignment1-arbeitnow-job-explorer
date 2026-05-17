@@ -1,6 +1,6 @@
-# Assignment 1 App
+# assignment1/
 
-This folder contains the React + Vite frontend used in the COM4381 assignment.
+React + Vite + TypeScript source for Part 2 of the COM4381 assignment.
 
 ## Run
 
@@ -14,3 +14,11 @@ pnpm dev
 ```powershell
 pnpm build
 ```
+
+## Lint
+
+```powershell
+pnpm lint
+```
+
+See the root `README.md` for the project description, group members, and the API used.

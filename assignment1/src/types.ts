@@ -1,4 +1,4 @@
-export type QueryMode = 'recent' | 'visa'
+export type QueryMode = 'recent' | 'page2' | 'visa'
 
 export type SortMode = 'recent' | 'company' | 'remote'
 
