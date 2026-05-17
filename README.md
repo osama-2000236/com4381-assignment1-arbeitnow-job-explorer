@@ -21,4 +21,4 @@ pnpm install
 pnpm dev
 ```
 
-Then open the URL Vite prints (usually `http://localhost:5173`).
+Then open the URL Vite prints.
