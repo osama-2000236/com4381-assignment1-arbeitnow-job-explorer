@@ -466,6 +466,19 @@
   border-radius: var(--radius-xs);
 }
 
+/* Mode explainer (sits between tabs and request line) */
+
+.mode-explain {
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  background: var(--brand-50);
+  border: 1px solid var(--brand-100);
+  font-size: 13px;
+  color: var(--brand-800);
+  line-height: 1.5;
+}
+
 /* Request line */
 
 .req {

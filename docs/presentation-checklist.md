@@ -16,8 +16,8 @@ Stuff to have ready and stuff to click while the projector is on us.
 
 - [ ] Run all three Postman requests in order. Comment on the URL change each time.
 - [ ] Open the app. Walk through the hero and the API summary panel on the right.
-- [ ] Click the Page 2 tab. Point to the network panel.
-- [ ] Click the Visa sponsorship tab. Same.
+- [ ] Click the **Older page** tab (fires `?page=2`). Point to the network panel.
+- [ ] Click the **Visa-friendly only** tab (fires `?visa_sponsorship=true`). Same.
 - [ ] Press the copy button. Paste it in a new tab to prove it matches.
 - [ ] Type in the search. Watch the counter change. No new request.
 - [ ] Change sort. Toggle remote. Counter updates.

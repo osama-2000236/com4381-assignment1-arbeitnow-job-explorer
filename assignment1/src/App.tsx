@@ -452,16 +452,16 @@ function App() {
           <div className="controls">
             <div className="controls__head">
               <div>
-                <h2>What we ask the API</h2>
+                <h2>Switch the request</h2>
                 <p>
-                  Three modes. Each one is a different GET. Switching tabs is the only
-                  thing in this UI that talks to the network.
+                  Three buttons. Pick one and it fires a fresh GET. Everything else on
+                  this page is just sorting the result we already have.
                 </p>
               </div>
             </div>
 
             <fieldset className="qmode">
-              <legend>Query mode</legend>
+              <legend>Pick the request</legend>
               <label>
                 <input
                   type="radio"
@@ -470,7 +470,7 @@ function App() {
                   checked={queryMode === 'recent'}
                   onChange={() => startTransition(() => setQueryMode('recent'))}
                 />
-                <span>Recent</span>
+                <span>Latest jobs</span>
               </label>
               <label>
                 <input
@@ -480,7 +480,7 @@ function App() {
                   checked={queryMode === 'page2'}
                   onChange={() => startTransition(() => setQueryMode('page2'))}
                 />
-                <span>Page 2</span>
+                <span>Older page</span>
               </label>
               <label>
                 <input
@@ -490,9 +490,17 @@ function App() {
                   checked={queryMode === 'visa'}
                   onChange={() => startTransition(() => setQueryMode('visa'))}
                 />
-                <span>Visa sponsorship</span>
+                <span>Visa-friendly only</span>
               </label>
             </fieldset>
+
+            <p className="mode-explain">
+              {queryMode === 'recent'
+                ? 'No query parameters. Returns the freshest page Arbeitnow has right now.'
+                : queryMode === 'page2'
+                  ? 'Adds ?page=2. Same resource, second page of results. Shows the API supports pagination.'
+                  : 'Adds ?visa_sponsorship=true. The server pre-filters for roles that mention visa sponsorship, so the JSON we get back is already trimmed.'}
+            </p>
 
             <div className="req">
               <span className="req__verb">GET</span>
@@ -776,43 +784,44 @@ function App() {
 
         <section id="guide" className="guide" aria-label="REST notes">
           <div className="guide__head">
-            <h2>What we say in Part 1</h2>
+            <h2>The REST pieces, one card each</h2>
             <p>
-              The provider, the URL, the verb, the format, and the two query parameters
-              we wire into the UI tabs. Same info, condensed for the slide.
+              This is the cheat sheet for the oral part of the assignment. Read across
+              left to right and you have covered every REST principle the lecturer
+              asked for in Part 1.
             </p>
           </div>
 
           <div className="guide__grid">
             <Fact
-              label="Provider"
+              label="Who runs the service"
               value={API_PROVIDER}
-              note="Free public job board run by Arbeitnow. No API key, no rate-limit headers we have to negotiate."
+              note="Arbeitnow is a free German job board. No API key, no signup. They left CORS open so the browser can call it directly."
             />
             <Fact
-              label="Base resource"
+              label="The resource we hit"
               value={API_ROOT_URL + API_RESOURCE_PATH}
-              note="Stands for the whole jobs collection. We hit it straight from the browser."
+              note="One URL standing for the whole jobs collection. Root domain on the left, path on the right, both pulled from the constants in our code."
             />
             <Fact
-              label="Method"
+              label="HTTP verb"
               value="GET"
-              note="The verb fits because we never change the server's state. We just read."
+              note="Reading only. We do not POST, PATCH, or DELETE because the server is read-only for us. GET is the polite choice."
             />
             <Fact
-              label="Representation"
+              label="What comes back"
               value="application/json"
-              note="JSON comes back ready to map into the cards on the left. Single representation, no Accept negotiation."
+              note="JSON. One representation, no Accept-header negotiation. We map it into the cards on the left of the page."
             />
             <Fact
-              label="?page=2"
+              label="Query parameter #1"
               value={API_QUERY_PAGE2}
-              note="Pagination. Same resource, second page. Live in the middle tab."
+              note="Pagination. Same resource URL, different slice of the data. Wired into the Older-page tab above."
             />
             <Fact
-              label="?visa_sponsorship=true"
+              label="Query parameter #2"
               value={API_QUERY_VISA}
-              note="Server-side filter. Useful for the half of our class planning to leave the country anyway."
+              note="Server-side filter for roles that mention visa sponsorship. Wired into the Visa-friendly tab."
             />
           </div>
         </section>

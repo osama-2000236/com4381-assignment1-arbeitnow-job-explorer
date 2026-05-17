@@ -26,7 +26,11 @@ We looked at a few other APIs from the public-apis list. Most either gated behin
 
 ## What the app does
 
-- Sends one GET per request mode (recent / `?page=2` / `?visa_sponsorship=true`). Each tab in the UI is a different URL, mapped one to one to a saved Postman request.
+- Sends one GET per request mode. Three tabs in the UI:
+  - **Latest jobs** - calls the base URL with no parameters.
+  - **Older page** - adds `?page=2` to demo pagination.
+  - **Visa-friendly only** - adds `?visa_sponsorship=true` so the server pre-filters for jobs that mention visa sponsorship.
+  Each tab maps one-to-one to a saved Postman request.
 - Lets you search by title, company, location, or tag. Filter by job type. Sort by date, company, or remote first.
 - Has a small star button on every job. Whatever you save is kept in `localStorage`, so the list survives a refresh. There is a "Saved only" toggle and a count pill in the topbar.
 - Shows the active GET URL on a dark request line with a copy button. Useful in the demo for paste-checking in Postman.

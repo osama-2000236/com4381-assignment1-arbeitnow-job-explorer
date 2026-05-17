@@ -30,7 +30,7 @@ Expand one job in Postman so the class sees the fields the UI actually uses: `sl
 
 - Open the running app at `localhost:5173`.
 - Hero on the right shows the same root URL / resource / method we just demoed in Postman.
-- Click the three request mode tabs (Recent, Page 2, Visa sponsorship) and show the URL change. DevTools network panel shows exactly one new request per click.
+- Click the three request tabs: **Latest jobs** (no params), **Older page** (`?page=2`), **Visa-friendly only** (`?visa_sponsorship=true`). The dark URL line and the helper note under the tabs both update. DevTools network panel shows exactly one new request per click.
 - Hit the small copy button next to the GET URL, paste into the URL bar, prove it is the same string.
 - Type in the search box. Toggle remote-only. Switch sort. The counter at the bottom updates ("X of Y match"). Network stays quiet because everything below the tabs is local.
 - Click the star on two or three jobs. The number in the topbar pill goes up.
