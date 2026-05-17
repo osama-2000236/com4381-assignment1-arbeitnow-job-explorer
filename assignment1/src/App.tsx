@@ -376,13 +376,11 @@ function App() {
         <section className="hero">
           <div>
             <span className="hero__eyebrow">COM4381 · Part 2</span>
-            <h1>A browser that reads a public jobs board, with a star button so we don't lose the good ones.</h1>
+            <h1>A frontend that reads jobs from the public Arbeitnow REST API.</h1>
             <p className="hero__lede">
-              Iyas and I picked Arbeitnow because most public job APIs hide behind keys
-              and OAuth dances. Arbeitnow just hands you JSON. We send one{' '}
-              <code>GET</code> per request mode and keep the rest of the work
-              (search, sort, save) in the page. Whatever you star is kept in{' '}
-              <code>localStorage</code>, so the list survives a refresh.
+              One <code>GET</code> per request mode. The JSON comes back, the list
+              renders, then search and sort run locally so we only talk to the network
+              when the tab changes.
             </p>
             <div className="hero__actions">
               <a className="btn btn--primary" href="#workspace">Browse the list</a>
@@ -393,7 +391,7 @@ function App() {
           <aside className="hero__meta" aria-label="API summary">
             <div className="hero__meta-title">{API_PROVIDER}</div>
             <p className="hero__meta-sub">
-              No auth. No pagination cursor wrangling. Just JSON.
+              Public job board. JSON. No auth required.
             </p>
             <dl>
               <div>
@@ -827,20 +825,6 @@ function App() {
         </section>
       </div>
 
-      <footer className="footnote">
-        <p>
-          Built for COM4381 by Osama Abujarad (1202883) and Iyas Qasqas (1220248), Birzeit
-          University. Source on{' '}
-          <a
-            href="https://github.com/osama-2000236/com4381-assignment1-arbeitnow-job-explorer"
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-          </a>
-          .
-        </p>
-      </footer>
     </main>
   )
 }

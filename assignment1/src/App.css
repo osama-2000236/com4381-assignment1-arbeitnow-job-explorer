@@ -913,23 +913,6 @@
   flex-shrink: 0;
 }
 
-/* Footer */
-
-.footnote {
-  margin-top: 24px;
-  padding: 16px;
-  text-align: center;
-  font-size: 12px;
-  color: var(--ink-subtle);
-}
-
-.footnote a {
-  color: var(--brand-700);
-  text-decoration: underline;
-  text-decoration-color: var(--brand-100);
-  text-underline-offset: 3px;
-}
-
 /* Detail */
 
 .detail {
